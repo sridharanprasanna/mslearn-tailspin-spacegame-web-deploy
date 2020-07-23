@@ -74,7 +74,7 @@ stages:
     - publish: '$(Build.ArtifactStagingDirectory)'
       artifact: drop
 
-- stage: 'PS Custom'
+- stage: 'PSCustom'
   displayName: 'PS Custom for testing'
   jobs: 
   - job: 'Build'
