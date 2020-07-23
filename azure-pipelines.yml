@@ -74,6 +74,25 @@ stages:
     - publish: '$(Build.ArtifactStagingDirectory)'
       artifact: drop
 
+- stage: 'PS Custom'
+  displayName: 'PS Custom for testing'
+  jobs: 
+  - job: 'Build'
+    displayName: 'Build job'
+    pool:
+      vmImage: 'ubuntu-18.04'
+      demands:
+      - npm
+
+    variables:
+      wwwrootDir: 'Tailspin.SpaceGame.Web/wwwroot'
+      dotnetSdkVersion: '3.1.300'
+
+    steps:
+    - script: 'echo "Build.Reason is $(Build.Reason) $(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)"'
+      displayName: 'Write build info'
+      workingDirectory: $(wwwrootDir)
+
 - stage: 'Dev'
   displayName: 'Deploy to the dev environment'
   dependsOn: Build
